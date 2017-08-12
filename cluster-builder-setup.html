@@ -1,0 +1,29 @@
+<html>
+  <body style="padding: 20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+    <h2>Cluster Builder Desktop Setup</h2>
+    <p>
+    Cluster Builder requires VMware Workstation for Linux. VMware Workstation requires manual user download and installation.  There is a 30-day free trial period.
+    </p>
+    <a href="https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068">Download</a>
+    <br/>
+    <p>
+    You will then need to setup your Github account so that the cluster builder repo can be fetched.  
+    </p>
+    Eg.
+    <pre style="background-color: #AAA;color:#333">
+
+      # create a new keys
+      ssh-keygen -f /home/admin/.ssh/id_rsa -t rsa -N ''
+
+      # add this to your Github ssh keys
+      cat ~/.ssh/id_rsa.pub
+
+      ...
+      # then
+      mkdir -p ~/Workspace
+      cd ~/Workspace
+      git clone git@github.com:ids/cluster-builder.git
+
+    </pre>
+  </body>
+</html>

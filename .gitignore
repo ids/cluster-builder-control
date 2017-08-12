@@ -1,0 +1,8 @@
+*.ova
+output_cbd
+iso/*.iso
+installs
+keys/authorized_keys
+cluster-builder-desktop.vmwarevm
+
+
