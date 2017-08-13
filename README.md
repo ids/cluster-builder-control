@@ -1,5 +1,5 @@
 # Cluster Builder Desktop
-This packer configuration builds a CentOS7 desktop for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com:ids/cluster-builder).
+This packer configuration builds a CentOS7 desktop for creating and managing CaaS cluster VMware VMs using [cluster-builder]("https://github.com/ids/cluster-builder").
 
 The _Cluster Builder Desktop_ can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 
@@ -43,7 +43,7 @@ The initial login account credentials are:
 When the VM is first created and booted the user will need to:
 
 * Install [VMware Workstation for Linux](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068) 
-* Setup a workspace folder and fetch [cluster-builder](https://github.com:ids/cluster-builder)
+* Setup a workspace folder and fetch [cluster-builder](https://github.com/ids/cluster-builder)
 
 > See **cluster-builder-setup.html** in the root of the home directory of the VM admin user for links and hints.
 
