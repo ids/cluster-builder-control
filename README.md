@@ -21,6 +21,7 @@ _CBD_ can deploy directly to ESXi.  This can be handy if you are running a Windo
 2. Prep the ESXi servers using the ansible script **ansible/esxi-packer.yml**.  If you don't have ansible to do this, review the steps and execute them manually on the ESXi server(s).  The service.xml file is copied for the VNC service definition, which can alternately be included manually.
 3. Create or update the **remote-options.json** file for packer that specifies the following:
 
+
     {
       "remote_host": "esxi-5",
       "remote_datastore": "datastore5",
@@ -30,6 +31,7 @@ _CBD_ can deploy directly to ESXi.  This can be handy if you are running a Windo
       "remote_private_key_file": "/Users/someone/.ssh/id_rsa",
       "vm_name": "cluster-builder-desktop"
     }
+
 
 > Note: You must specify the remote password of the ESXi server as the ovftool does not use passwordless SSH.
 
