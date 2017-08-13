@@ -32,11 +32,11 @@ Then:
 ## General Instructions
 The initial login account credentials are:
 
-  uid: root
-  pwd: TempPass2017
+    uid: root
+    pwd: TempPass2017
 
-  uid: admin
-  pwd: admin
+    uid: admin
+    pwd: admin
 
 > **Change them immediately!** - you have been warned!
 
@@ -52,7 +52,7 @@ Everything else required should already be installed.
 #### Note
 VS Code has also been pre-installed for easy editing and viewing of the cluster builder source files:
 
-  $ cd cluster-builder
-  $ code .
+    $ cd cluster-builder
+    $ code .
 
 
