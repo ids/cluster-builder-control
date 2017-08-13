@@ -73,7 +73,7 @@ systemctl disable firewalld
 echo
 echo '>>> Installing Gnome'
 yum -y groups install "GNOME Desktop"
-yum install -y openssh-clients rsync git vim mc tmux firefox
+yum install -y openssh-clients rsync git vim mc tmux firefox xrdp
 
 systemctl set-default graphical.target
 
