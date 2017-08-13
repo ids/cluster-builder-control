@@ -1,0 +1,83 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "bin/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "bin/vmware-tools.sh"
+    },
+    {
+      "type": "file",
+      "source": "keys/authorized_keys",
+      "destination": "/tmp/authorized_keys"
+    },     
+    {
+      "type": "file",
+      "source": "cluster-builder-setup.html",
+      "destination": "/home/admin/"
+    },     
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/centos.yml",
+      "playbook_dir": "ansible",
+      "extra_arguments": "-vvvvv"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "inline": ["reboot"]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "bin/zerodisk.sh"
+    }  
+  ],
+
+  "post-processors": [{
+      "type": "shell-local",
+      "inline": [
+          "ovftool --overwrite cluster-builder-desktop.vmwarevm/cluster-builder-desktop.vmx cluster-builder-desktop.ova"
+      ]
+  }],
+ 
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 256000,
+      "guest_os_type": "centos-64",
+      "headless": true,
+      "http_directory": "http",
+      "iso_urls": [
+        "iso/CentOS-7-x86_64-Minimal-1611.iso",
+        "http://mirrors.sonic.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "27bd866242ee058b7a5754e83d8ee8403e216b93d130d800852a96f41c34d86a",
+      "ssh_username": "admin",
+      "ssh_password": "admin",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "20000s",
+      "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
+      "output_directory": "cluster-builder-desktop.vmwarevm",
+      "vm_name": "cluster-builder-desktop",
+      "vmx_template_path": "desktop-template.vmx",
+      "format": "ova",
+      "vmx_data": {
+        "memsize": "6144",
+        "numvcpus": "2"
+      },
+       "vmx_data_post": {
+        "ethernet0.connectionType": "bridged"
+      }
+   }
+  ]
+}

@@ -1,0 +1,42 @@
+---
+- hosts: esxi
+  remote_user: root
+  gather_facts: false
+  tasks:  
+
+  - name: GuestIPHack
+    shell: esxcli system settings advanced set -o /Net/GuestIPHack -i 1
+
+  - name: Prep for VNC addition
+    shell: chmod 644 /etc/vmware/firewall/service.xml
+
+  - name: Prep for VNC addition
+    shell: chmod +t /etc/vmware/firewall/service.xml
+
+  - name: Prep for VNC addition
+    shell: cp /etc/vmware/firewall/service.xml /etc/vmware/firewall/service.xml.backup
+
+  - name: Prep for VNC addition
+    copy:
+      src: service.xml
+      dest: /etc/vmware/firewall/service.xml
+      mode: 444
+
+  - name: Refresh rules
+    shell: esxcli network firewall refresh
+
+  - name: Enable VNC
+    shell: esxcli network firewall ruleset set --ruleset-id VNC --enabled true
+
+  - name: List Ruleset
+    shell: esxcli network firewall ruleset list
+    register: ruleset_out
+
+  - debug: msg="{{ ruleset_out.stdout_lines }}"
+
+  - name: Verify Ruleset
+    shell: esxcli network firewall ruleset rule list
+    register: vruleset_out
+    
+  - debug: msg="{{ vruleset_out.stdout_lines }}"
+  

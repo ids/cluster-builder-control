@@ -84,7 +84,15 @@ rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
 rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
 
-yum --enablerepo=nux-dextop install -y fontconfig-infinality cairo libXft freetype-infinality
+yum --enablerepo=nux-dextop install -y fontconfig-infinality cairo libXft freetype-infinality google-droid-sans-mono-fonts
+
+mkdir -p /home/admin/.config
+mkdir -p /home/admin/.config/gtk-3.0
+
+cat > /home/admin/.config/gtk-3.0/settings.ini << EOF
+[Settings]
+gtk-application-prefer-dark-theme=1
+EOF
 
 cat > /home/admin/.fonts.conf << EOF
   <?xml version="1.0"?>

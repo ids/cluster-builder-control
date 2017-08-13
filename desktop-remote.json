@@ -66,17 +66,29 @@
       "ssh_password": "admin",
       "ssh_port": 22,
       "ssh_wait_timeout": "20000s",
+      "disk_type_id": "thin",
+      "vnc_port_min": "5900",
+      "vnc_port_max": "5911",
+      "vnc_bind_address": "0.0.0.0",
+      "vnc_disable_password": true,
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
-      "output_directory": "cluster-builder-desktop.vmwarevm",
+      "remote_type": "esx5",
+      "remote_host": "esxi-5",
+      "remote_datastore": "datastore5",
+      "remote_cache_datastore": "datastore5",
+      "remote_username": "root",
+      "remote_private_key_file": "/Users/seanhig/.ssh/id_rsa",
       "vm_name": "cluster-builder-desktop",
-      "vmx_template_path": "cluster-builder-desktop-template.vmx",
-      "format": "ova",
+      "vmx_template_path": "desktop-template.vmx",
+      "format": "vmx",
+      "keep_registered": true,
       "vmx_data": {
         "memsize": "6144",
-        "numvcpus": "2"
+        "numvcpus": "2",
+        "ethernet0.connectionType": "bridged",
+        "ethernet0.networkName": "VM Network"
       },
        "vmx_data_post": {
-        "ethernet0.connectionType": "bridged"
       }
    }
   ]
