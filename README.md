@@ -5,7 +5,7 @@ The _Cluster Builder Desktop_ can be deployed directly to ESXi and uses nested V
 
 ## Requirements
 
-#### macOS / Linux / Windows
+##### macOS / Linux / Windows
 
 - [Packer 1.04+](https://www.packer.io/downloads.html)
 - [VMware Fusion/Workstation](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068)
