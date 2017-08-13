@@ -1,5 +1,5 @@
 # Cluster Builder Desktop
-This packer configuration builds a CentOS7 desktop for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder).
+This packer configuration builds a CentOS7 desktop for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
 
 The _Cluster Builder Desktop_ can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 
