@@ -52,6 +52,11 @@ cd /home/admin/Setups
 curl -o /home/admin/Setups/vscode.rpm https://az764295.vo.msecnd.net/stable/8b95971d8cccd3afd86b35d4a0e098c189294ff2/code-1.15.0-1502309602.el7.x86_64.rpm
 yum install -y /home/admin/Setups/vscode.rpm
 
+echo
+echo '>>> Disable Firewalld'
+systemctl stop firewalld
+systemctl disable firewalld
+
 #echo
 #echo '>>> Generating the admin SSH key for addition to operator github account...'
 #mkdir -p /home/admin/.ssh

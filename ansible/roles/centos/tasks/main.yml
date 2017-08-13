@@ -21,6 +21,11 @@
 
 - debug: msg="CentOS upgraded to {{ kernel_version.stdout }}"
 
+- name: Install Kernel Headers
+  yum: >
+    name=kernel-devel
+    state=latest
+
 # kdump's default config will not work on machines with less than 2GB memory.
 # But machine memory is configurable at runtime.
 # So just disable kdump (bonus: frees up active memory).
