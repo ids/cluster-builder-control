@@ -1,6 +1,11 @@
 {
   "provisioners": [
     {
+      "type": "file",
+      "source": "http/bg.jpg",
+      "destination": "/tmp/bg.jpg"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "bin/setup.sh"

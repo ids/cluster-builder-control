@@ -86,48 +86,15 @@ rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.
 
 yum --enablerepo=nux-dextop install -y fontconfig-infinality cairo libXft freetype-infinality google-droid-sans-mono-fonts
 
-mkdir -p /home/admin/.config
-mkdir -p /home/admin/.config/gtk-3.0
-
-cat > /home/admin/.config/gtk-3.0/settings.ini << EOF
-[Settings]
-gtk-application-prefer-dark-theme=1
-EOF
-
-cat > /home/admin/.fonts.conf << EOF
-  <?xml version="1.0"?>
-  <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-  <fontconfig>
-    <match target="font">
-    <edit mode="assign" name="hinting" >
-      <bool>true</bool>
-    </edit>
-    </match>
-    <match target="font" >
-    <edit mode="assign" name="autohint" >
-      <bool>true</bool>
-    </edit>
-    </match>
-    <match target="font">
-    <edit mode="assign" name="hintstyle" >
-    <const>hintslight</const>
-    </edit>
-    </match>
-    <match target="font">
-    <edit mode="assign" name="rgba" >
-      <const>rgb</const>
-    </edit>
-    </match>
-    <match target="font">
-    <edit mode="assign" name="antialias" >
-      <bool>true</bool>
-    </edit>
-    </match>
-    <match target="font">
-      <edit mode="assign" name="lcdfilter">
-      <const>lcddefault</const>
-      </edit>
-    </match>
-  </fontconfig>
-EOF
+if [ -f /tmp/bg.jpg ]; then
+  echo "***"
+  echo "*** Overwriting Default Desktop Background"
+  cp /tmp/bg.jpg /usr/share/backgrounds/night.jpg
+  cp /tmp/bg.jpg /usr/share/backgrounds/day.jpg
+  cp /tmp/bg.jpg /usr/share/backgrounds/morning.jpg
+  cp /tmp/bg.jpg /usr/share/backgrounds/default.jpg
+else 
+  echo "***"
+  echo "*** No CDB Background Image!"
+fi 
 

@@ -1,6 +1,11 @@
 {
   "provisioners": [
     {
+      "type": "file",
+      "source": "http/bg.jpg",
+      "destination": "/tmp/bg.jpg"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "bin/setup.sh"
@@ -25,26 +30,13 @@
       "playbook_file": "ansible/centos.yml",
       "playbook_dir": "ansible",
       "extra_arguments": "-vvvvv"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "inline": ["reboot"]
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/zerodisk.sh"
     }  
   ],
-
-  "post-processors": [{
-      "type": "shell-local",
-      "inline": [
-          "ovftool --overwrite cluster-builder-desktop.vmwarevm/cluster-builder-desktop.vmx cluster-builder-desktop.ova"
-      ]
-  }],
  
+  "variables": {
+    "remote_password": ""
+  },
+
   "builders": [
     {
       "type": "vmware-iso",
@@ -77,16 +69,20 @@
       "remote_datastore": "datastore5",
       "remote_cache_datastore": "datastore5",
       "remote_username": "root",
+      "remote_password": "{{user `remote_password`}}",
       "remote_private_key_file": "/Users/seanhig/.ssh/id_rsa",
       "vm_name": "cluster-builder-desktop",
       "vmx_template_path": "desktop-template.vmx",
-      "format": "vmx",
       "keep_registered": true,
+      "skip_export": true,
+      "format": "vmx",
       "vmx_data": {
         "memsize": "6144",
         "numvcpus": "2",
         "ethernet0.connectionType": "bridged",
-        "ethernet0.networkName": "VM Network"
+        "ethernet0.networkName": "VM Network",
+        "svga.vramSize": "134217728",
+        "mks.enable3d": "TRUE"
       },
        "vmx_data_post": {
       }
