@@ -13,6 +13,11 @@
     {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "bin/fontsel7.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "bin/vmware-tools.sh"
     },
     {
