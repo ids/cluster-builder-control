@@ -10,6 +10,15 @@ The _Cluster Builder Desktop_ can be deployed directly to ESXi and uses nested V
 
 (All platforms)
 
+### Windows Notes
+- Packer has to be in the PATH.  When you download packer there is just an executable which can be placed anywhere.  
+
+Eg. 
+
+		C:\Packer\packer
+
+Ensure that **C:\Packer\** is in the PATH.
+
 ### Build Local VM and OVA Template Instructions
 
     $ packer build desktop.json
