@@ -47,13 +47,6 @@
       "script": "bin/zerodisk.sh"
     }  
   ],
-
-  "post-processors": [{
-      "type": "shell-local",
-      "inline": [
-          "ovftool --overwrite cluster-builder-desktop.vmwarevm/cluster-builder-desktop.vmx cluster-builder-desktop.ova"
-      ]
-  }],
  
   "builders": [
     {
