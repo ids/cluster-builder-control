@@ -75,7 +75,7 @@
       "ssh_username": "admin",
       "ssh_password": "admin",
       "ssh_port": 22,
-      "ssh_wait_timeout": "20000s",
+      "ssh_wait_timeout": "20s",
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
       "output_directory": "cluster-builder-desktop.vmwarevm",
       "vm_name": "cluster-builder-desktop",
