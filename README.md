@@ -19,9 +19,18 @@ Eg.
 
 Ensure that **C:\Packer\** is in the PATH.
 
+- Also make sure that Windows Firewall is off, or allows the following:
+	- VNC
+	- SSH
+	- HTTP
+	
 ### Build Local VM and OVA Template Instructions
 
     $ packer build desktop.json
+
+or
+
+		C:\> packer build desktop.json
 
 ### Direct Remote ESXi Deployment Instructions
 _CBD_ can deploy directly to ESXi.  This can be handy if you are running a Windows desktop and want to centralize management of your clusters within the ESXi environment.
