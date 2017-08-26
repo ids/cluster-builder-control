@@ -77,7 +77,7 @@
       "remote_password": "{{user `remote_password`}}",
       "remote_private_key_file": "/Users/seanhig/.ssh/id_rsa",
       "vm_name": "cluster-builder-control",
-      "vmx_template_path": "control-template.vmx",
+      "vmx_template_path": "cluster-builder-control-template.vmx",
       "keep_registered": true,
       "skip_export": true,
       "format": "vmx",
