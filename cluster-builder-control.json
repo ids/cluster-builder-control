@@ -47,7 +47,14 @@
       "script": "bin/zerodisk.sh"
     }  
   ],
- 
+
+  "post-processors": [{
+      "type": "shell-local",
+      "inline": [
+          "ovftool --overwrite cluster-builder-control.vmwarevm/cluster-builder-control.vmx cluster-builder-control.ova"
+      ]
+  }],
+
   "builders": [
     {
       "type": "vmware-iso",
