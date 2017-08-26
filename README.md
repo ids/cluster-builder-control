@@ -48,7 +48,7 @@ Eg.
       "remote_username": "root",
       "remote_password": "{{ user `remote_password`}}",
       "remote_private_key_file": "/Users/someone/.ssh/id_rsa",
-      "vm_name": "cluster-builder-desktop"
+      "vm_name": "cluster-builder-control"
     }
 
 
