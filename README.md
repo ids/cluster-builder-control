@@ -33,7 +33,7 @@ or
 		C:\> packer build cluster-builder-control.json
 
 ### Direct Remote ESXi Deployment Instructions
-_CBD_ can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
+the __cluster builder control__ station can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
 
 1. First you must ensure all your ESXi servers have their **/etc/ssh/keysroot** _authorized_keys_ set for passwordless access.
 2. Prep the ESXi servers using the ansible script **ansible/esxi-packer.yml**.  If you don't have ansible to do this, review the steps and execute them manually on the ESXi server(s).  The service.xml file is copied for the VNC service definition, which can alternately be included manually.

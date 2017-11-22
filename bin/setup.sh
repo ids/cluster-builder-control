@@ -25,16 +25,24 @@ echo '>>> Installing pip (and dependencies)'
 yum install -y python-devel libffi-devel openssl-devel gcc python-pip redhat-rpm-config
 
 echo '>>> Upgrading pip'
-pip install --upgrade
+pip install --upgrade pip
 
 # Avoid bug in default python cryptography library
 # [WARNING]: Optional dependency 'cryptography' raised an exception, falling back to 'Crypto'
 echo '>>> Upgrading python cryptography library'
 pip install --upgrade cryptography
 
+# Fix because Python is pure crap - kill it.
+pip uninstall urllib3
+
 echo
 echo '>>> Installing Ansible'
 pip install ansible
+
+echo
+echo '>>> Installing Taurus Load Testing Tool'
+pip install psutil
+pip install bzt
 
 echo
 echo '>>> Installing Packer'
@@ -49,26 +57,13 @@ rm /home/admin/Setups/packer.zip
 echo
 echo '>>> Installing VS Code'
 cd /home/admin/Setups
-curl -o /home/admin/Setups/vscode.rpm https://az764295.vo.msecnd.net/stable/8b95971d8cccd3afd86b35d4a0e098c189294ff2/code-1.15.0-1502309602.el7.x86_64.rpm
+curl -o /home/admin/Setups/vscode.rpm https://az764295.vo.msecnd.net/stable/929bacba01ef658b873545e26034d1a8067445e9/code-1.18.1-1510857496.el7.x86_64.rpm
 yum install -y /home/admin/Setups/vscode.rpm
 
 echo
 echo '>>> Disable Firewalld'
 systemctl stop firewalld
 systemctl disable firewalld
-
-#echo
-#echo '>>> Generating the admin SSH key for addition to operator github account...'
-#mkdir -p /home/admin/.ssh
-#chmod 700 /home/admin/.ssh
-#chown admin:admin /home/admin/.ssh
-#ssh-keygen -f /home/admin/.ssh/id_rsa -t rsa -N ''
-
-#echo
-#echo '***'
-#echo '*** SSH public key: add this to your github SSH keys'
-#cat /home/admin/.ssh/id_rsa.pub
-#echo '***'
 
 echo
 echo '>>> Installing Gnome'
@@ -98,3 +93,8 @@ else
   echo "*** No CDB Background Image!"
 fi 
 
+echo '>>> Installing Latest Docker Version'
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum makecache fast
+yum install -y docker-ce
+docker --version

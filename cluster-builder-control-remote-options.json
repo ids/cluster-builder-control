@@ -1,7 +1,7 @@
 {
-  "remote_host": "esxi-5",
-  "remote_datastore": "datastore5",
-  "remote_cache_datastore": "datastore5",
+  "remote_host": "esxi-x",
+  "remote_datastore": "datastore-m2",
+  "remote_cache_datastore": "datastore-ssd",
   "remote_username": "root",
   "remote_password": "{{user `remote_password`}}",
   "remote_private_key_file": "/Users/seanhig/.ssh/id_rsa",
