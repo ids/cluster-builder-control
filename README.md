@@ -37,9 +37,8 @@ or
 
     $ packer build –var "rhel_lic=[key]" cluster-builder-control-rhel.json
     
-[key] is the alphanumeric string used to register RHEL to the satellite service.
-The registration script (rhel7-setup.sh) should be place at the root of the repository.
-    
+**[key]** is the alphanumeric string used to register RHEL to the satellite service.
+The RHEL7 ISO should copied to the **iso/** folder and named **rhel-server-7.4-x86_64-dvd.iso**.
 
 ### Direct Remote ESXi Deployment Instructions
 the __cluster builder control__ station can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
