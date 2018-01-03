@@ -1,5 +1,5 @@
 # Cluster Builder Control
-This packer configuration builds a CentOS7 control station for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
+This packer configuration builds a CentOS7 or RHEL7 control station for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
 
 The _Cluster Builder Control_ virtual machine can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 
@@ -24,13 +24,22 @@ Ensure that **C:\Packer\** is in the PATH.
 	- SSH
 	- HTTP
 	
-### Build Local VM and OVA Template Instructions
+### Build Local CentOS7 VM and OVA Template Instructions 
 
     $ packer build cluster-builder-control.json
 
 or
 
 		C:\> packer build cluster-builder-control.json
+		
+		
+### Build Local RHEL7 VM and OVA Template Instructions
+
+    $ packer build –var “rhel_lic=[key] cluster-build-control-rhel.json
+    
+    [key] is the alphanumeric string used to register RHEL to the satellite service.
+    The registration script (rhel7-setup.sh) should be place at the root of the repository.
+    
 
 ### Direct Remote ESXi Deployment Instructions
 the __cluster builder control__ station can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
