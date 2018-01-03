@@ -37,8 +37,8 @@ or
 
     $ packer build –var “rhel_lic=[key] cluster-build-control-rhel.json
     
-    [key] is the alphanumeric string used to register RHEL to the satellite service.
-    The registration script (rhel7-setup.sh) should be place at the root of the repository.
+[key] is the alphanumeric string used to register RHEL to the satellite service.
+The registration script (rhel7-setup.sh) should be place at the root of the repository.
     
 
 ### Direct Remote ESXi Deployment Instructions
