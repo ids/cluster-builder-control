@@ -35,7 +35,7 @@ or
 		
 ### Build Local RHEL7 VM and OVA Template Instructions
 
-    $ packer build –var “rhel_lic=[key] cluster-build-control-rhel.json
+    $ packer build –var "rhel_lic=[key]" cluster-build-control-rhel.json
     
 [key] is the alphanumeric string used to register RHEL to the satellite service.
 The registration script (rhel7-setup.sh) should be place at the root of the repository.
