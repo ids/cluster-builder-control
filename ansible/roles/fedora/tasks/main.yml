@@ -1,0 +1,5 @@
+# Upgrade/Update all packages to latest version
+- name: Upgrade Fedora
+  dnf: >
+    name=*
+    state=latest

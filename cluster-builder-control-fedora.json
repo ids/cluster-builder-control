@@ -1,20 +1,5 @@
 {
-  "variables": 
-  {
-    "rhel_lic": ""
-  },
-
   "provisioners": [
-    {
-      "type": "file",
-      "source": "rhel7-setup.sh",
-      "destination": "/tmp/rhel7-setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "sh '{{ .Path }}'",
-      "inline": ["sudo bash /tmp/rhel7-setup.sh {{user `rhel_lic`}}"]
-    },
     {
       "type": "file",
       "source": "http/bg.jpg",
@@ -23,17 +8,7 @@
     {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/setup-rhel.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/fontsel7.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/vmware-tools.sh"
+      "script": "bin/setup-fedora.sh"
     },
     {
       "type": "file",
@@ -54,19 +29,21 @@
     {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "inline": ["reboot"]
+      "inline": ["reboot"],
+      "expect_disconnect": true
     },
     {
       "type": "shell",
       "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/zerodisk.sh"
+      "script": "bin/zerodisk.sh",
+      "expect_disconnect": true
     }  
   ],
 
   "post-processors": [{
       "type": "shell-local",
       "inline": [
-          "ovftool --overwrite cluster-builder-control.vmwarevm/cluster-builder-control.vmx cluster-builder-control.ova"
+          "ovftool --overwrite cluster-builder-control.vmwarevm/cluster-builder-control.vmx output_ovas/fedora-cluster-builder-control.ova"
       ]
   }],
 
@@ -74,7 +51,7 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-rhel.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-fedora2.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 256000,
@@ -82,23 +59,23 @@
       "headless": true,
       "http_directory": "http",
       "iso_urls": [
-        "iso/rhel-server-7.4-x86_64-dvd.iso"
+        "iso/Fedora-Workstation-Live-x86_64-29-1.2.iso",
+        "https://download.fedoraproject.org/pub/fedora/linux/releases/29/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-29-1.2.iso"
       ],
       "iso_checksum_type": "sha256",
-      "iso_checksum": "431a58c8c0351803a608ffa56948c5a7861876f78ccbe784724dd8c987ff7000",
+      "iso_checksum": "653cc283749100e9b46625d23938ff890ae29482bef142f5a0f99c5a5ddc03e9",
       "ssh_username": "admin",
-      "ssh_password": "TempPass2017",
+      "ssh_password": "admin",
       "ssh_port": 22,
       "ssh_wait_timeout": "20000s",
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
-      "output_directory": "cluster-builder-control.vmwarevm",
+      "output_directory": "fedora-cluster-builder-control.vmwarevm",
       "vm_name": "cluster-builder-control",
-      "vmx_template_path": "cluster-builder-control-template.vmx",
+      "vmx_template_path": "templates/cluster-builder-control-template.vmx",
       "format": "ova",
       "vmx_data": {
         "memsize": "6144",
-        "numvcpus": "2",
-        "ethernet0.pciSlotNumber": "32"
+        "numvcpus": "2"
       },
        "vmx_data_post": {
         "ethernet0.connectionType": "bridged"

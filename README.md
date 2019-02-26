@@ -97,9 +97,7 @@ When the VM is first created and booted the user will need to:
 
 * Setup a workspace folder and fetch [cluster-builder](https://github.com/ids/cluster-builder)
 
-> 
-
-All other software required should already be installed on the VM, but feel free to customize to your preferences.
+> All other software required should already be installed on the VM, but feel free to customize to your preferences.
 
 #### Note
 VS Code has also been pre-installed for easy editing and viewing of the cluster builder source files:

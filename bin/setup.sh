@@ -4,8 +4,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Instructions from https://flatpacklinux.com/2016/05/27/install-ansible-2-1-on-rhelcentos-7-with-pip/
-
 echo '>>> Updating'
 sudo yum makecache fast
 
@@ -24,7 +22,7 @@ yum clean all
 echo
 echo '>>> Installing Gnome'
 yum -y groups install "GNOME Desktop"
-yum install -y openssh-clients rsync git vim mc tmux firefox xrdp
+yum install -y openssh-clients rsync git vim mc tmux firefox xrdp screen
 
 systemctl set-default graphical.target
 
@@ -52,7 +50,7 @@ echo
 echo '>>> Installing Packer'
 mkdir -p /home/admin/Setups
 cd /home/admin/Setups
-curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.0.4/packer_1.0.4_linux_amd64.zip?_ga=2.92008604.763705853.1502549016-1461564689.1499739058
+curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.3.4/packer_1.3.4_linux_amd64.zip
 unzip /home/admin/Setups/packer.zip -d /home/admin/Setups/
 cp /home/admin/Setups/packer /usr/local/bin 
 rm /home/admin/Setups/packer
@@ -66,16 +64,6 @@ systemctl disable firewalld
 # Fix because Python is pure crap - kill it.
 #pip uninstall urllib3
 
-
-echo
-echo '>>> Improving CentOS Fonts'
-yum -y install epel-release
-rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
-rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
-
-yum --enablerepo=nux-dextop install -y fontconfig-infinality cairo libXft freetype-infinality google-droid-sans-mono-fonts
-
 if [ -f /tmp/bg.jpg ]; then
   echo "***"
   echo "*** Overwriting Default Desktop Background"
@@ -88,15 +76,24 @@ else
   echo "*** No CDB Background Image!"
 fi 
 
-echo
-echo '>>> Installing VS Code'
-cd /home/admin/Setups
-curl -o /home/admin/Setups/vscode.rpm https://az764295.vo.msecnd.net/stable/929bacba01ef658b873545e26034d1a8067445e9/code-1.18.1-1510857496.el7.x86_64.rpm
-yum install -y /home/admin/Setups/vscode.rpm
-
-
 echo '>>> Installing Latest Docker Version'
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum makecache fast
 yum install -y docker-ce
 docker --version
+
+echo ">>> Installing Google Chrome"
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+yum install -y ./google-chrome-stable_current_*.rpm
+
+echo ">>> Installing Kubectl"
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+yum install -y kubectl
