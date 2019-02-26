@@ -43,8 +43,14 @@
   "post-processors": [{
       "type": "shell-local",
       "inline": [
-          "ovftool --overwrite cluster-builder-control.vmwarevm/cluster-builder-control.vmx output_ovas/fedora-cluster-builder-control.ova"
+          "ovftool --overwrite fedora-cluster-builder-control.vmwarevm/fedora-cluster-builder-control.vmx output_ovas/fedora-cluster-builder-control.ova"
       ]
+  },
+  {
+    "type": "shell-local",
+    "inline": [
+        "rm -rf cluster-builder-control.vmwarevm"
+    ]
   }],
 
   "builders": [
@@ -70,7 +76,7 @@
       "ssh_wait_timeout": "20000s",
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
       "output_directory": "fedora-cluster-builder-control.vmwarevm",
-      "vm_name": "cluster-builder-control",
+      "vm_name": "fedora-cluster-builder-control",
       "vmx_template_path": "templates/cluster-builder-control-template.vmx",
       "format": "ova",
       "vmx_data": {
