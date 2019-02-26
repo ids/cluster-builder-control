@@ -1,47 +1,48 @@
 # Cluster Builder Control
-This packer configuration builds a CentOS7 or RHEL7 control station for creating and managing CaaS cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
+
+This packer configuration builds a CentOS 7.6 or Fedora 29 control station for creating and managing cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
 
 The _Cluster Builder Control_ virtual machine can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 
 ## Required Software
 
-- [Packer 1.04+](https://www.packer.io/downloads.html)
-- [VMware Fusion/Workstation](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068)
+- [Packer 1.2+](https://www.packer.io/downloads.html)
+- [VMware Fusion or Workstation](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068)
 
 (All platforms)
 
 ### Windows Notes
-- Packer has to be in the PATH.  When you download packer there is just an executable which can be placed anywhere.  
+
+- Packer must be in the PATH.  When you download packer there is just an executable which can be placed anywhere.
 
 Eg. 
 
-		C:\Packer\packer
+	C:\Packer\packer
 
 Ensure that **C:\Packer\** is in the PATH.
 
-- Also make sure that Windows Firewall is off, or allows the following:
+- Also make sure that Windows Firewall is off, or allow the following:
 	- VNC
 	- SSH
 	- HTTP
-	
-### Build Local CentOS7 VM and OVA Template Instructions 
 
-    $ packer build cluster-builder-control.json
+### Build Instructions for Local CentOS7 Control Station OVA Template
+
+```
+$ packer build cluster-builder-control.json
+```
 
 or
 
-		C:\> packer build cluster-builder-control.json
-		
-		
-### Build Local RHEL7 VM and OVA Template Instructions
+```
+C:\> packer build cluster-builder-control.json
+```
 
-    $ packer build –var "rhel_lic=[key]" cluster-builder-control-rhel.json
-    
-**[key]** is the alphanumeric string used to register RHEL to the satellite service.
-The RHEL7 ISO should copied to the **iso/** folder and named **rhel-server-7.4-x86_64-dvd.iso**.
+> Once the OVA has been built it can be uploaded to ESXi/vSphere and provisioned accordingly.
 
 ### Direct Remote ESXi Deployment Instructions
-the __cluster builder control__ station can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
+
+The __cluster builder control__ station can deploy directly to ESXi.  This can be handy if you are running a Windows workstation and/or want to centralize management of your clusters within the ESXi environment.
 
 1. First you must ensure all your ESXi servers have their **/etc/ssh/keysroot** _authorized_keys_ set for passwordless access.
 2. Prep the ESXi servers using the ansible script **ansible/esxi-packer.yml**.  If you don't have ansible to do this, review the steps and execute them manually on the ESXi server(s).  The service.xml file is copied for the VNC service definition, which can alternately be included manually.
@@ -87,22 +88,19 @@ The initial login account credentials are:
 
 > You only need to login to GNOME once to setup VMware Workstation for Linux. See **cluster-builder-setup.html** in the root of the home directory of the VM admin user for links and hints.  It is also a handy way to setup the static IP address and hostname of the control station.  After that, and once _cluster-builder_ has been configured it can be used over SSH.
 
-When the VM is first created and booted the user will need to:
+Upon first boot:
 
-* Decide if they want to manually provision a static IP address and create their own user account.
+> Note that the admin account as been setup for passwordless access with the authorized_keys value set, but you must still change the passwords (and/or disable remote login).
 
-> Note that the admin account as been setup for passwordless access with the authorized_keys value set.
-
-* Install [VMware Workstation for Linux](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068) 
-
+* Change the root and admin passwords!
+* Assign a static IP (optional).
+* Install [VMware Workstation for Linux](https://my.vmware.com/web/vmware/details?downloadGroup=WKST-1257-LX&productId=524&rPId=17068) and ensure ovftool is in the path (if not you may need o download seperately)
 * Setup a workspace folder and fetch [cluster-builder](https://github.com/ids/cluster-builder)
-
-> All other software required should already be installed on the VM, but feel free to customize to your preferences.
 
 #### Note
 VS Code has also been pre-installed for easy editing and viewing of the cluster builder source files:
 
-    $ cd cluster-builder
-    $ code .
-
-
+```
+$ cd cluster-builder
+$ code .
+```
