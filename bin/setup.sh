@@ -50,7 +50,7 @@ echo
 echo '>>> Installing Packer'
 mkdir -p /home/admin/Setups
 cd /home/admin/Setups
-curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.3.4/packer_1.3.4_linux_amd64.zip
+curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.4.2/packer_1.4.2_linux_amd64.zip
 unzip /home/admin/Setups/packer.zip -d /home/admin/Setups/
 cp /home/admin/Setups/packer /usr/local/bin 
 rm /home/admin/Setups/packer
