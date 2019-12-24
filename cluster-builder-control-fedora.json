@@ -49,7 +49,7 @@
   {
     "type": "shell-local",
     "inline": [
-        "rm -rf cluster-builder-control.vmwarevm"
+        "rm -rf cluster-builder-control-fedora.vmx"
     ]
   }],
 
@@ -57,7 +57,7 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-fedora2.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-fedora.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
       "disk_size": 256000,
@@ -73,13 +73,13 @@
       "ssh_username": "admin",
       "ssh_password": "admin",
       "ssh_port": 22,
-      "ssh_wait_timeout": "20000s",
+      "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
       "output_directory": "fedora-cluster-builder-control.vmx",
       "vm_name": "fedora-cluster-builder-control",
       "vmx_template_path": "templates/cluster-builder-control-template.vmx",
       "vmx_data": {
-        "memsize": "6144",
+        "memsize": "2048",
         "numvcpus": "2"
       },
        "vmx_data_post": {
