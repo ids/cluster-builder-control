@@ -3,9 +3,5 @@
 rm -rf *.vmx
 
 IMG=cluster-builder-control.json
-if [ "$1" == "fedora" ]; then
-  IMG=cluster-builder-control-fedora.json
-fi
-
 packer build $IMG
 

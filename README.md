@@ -1,6 +1,6 @@
 # Cluster Builder Control
 
-This packer configuration builds a CentOS 7.6 or Fedora 30 control station for creating and managing cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
+This packer configuration builds a CentOS 7.6 control station for creating and managing cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
 
 The _Cluster Builder Control_ virtual machine can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 
@@ -30,19 +30,10 @@ Ensure that **C:\Packer\** is in the PATH.
 
 > Note that distribution __ISO__ files are kept in the __./iso__ folder.  If the specified iso does not exist, packer will attempt to download it from a supplied URL.  However, Packer will not re-use these downloads, and downloads every run, so it is best to download the __ISO__ manually and place it in the __./iso__ folder.
 
-The current __cluster-builder-control__ station is built using the following ISOs:
-
-* [CentOS-7-x86_64-Minimal-1908.iso](http://mirror.csclub.uwaterloo.ca/centos/7.7.1908/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso)
-* [Fedora-Server-dvd-x86_64-30-1.2.iso](https://download.fedoraproject.org/pub/fedora/linux/releases/30/Server/x86_64/iso/Fedora-Server-dvd-x86_64-30-1.2.iso)
+The current __cluster-builder-control__ station is built using the [CentOS-7-x86_64-Minimal-1908.iso](http://mirror.csclub.uwaterloo.ca/centos/7.7.1908/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso)
 
 ```
 $ packer build cluster-builder-control.json
-```
-
-or
-
-```
-$ packer build cluster-builder-control-fedora.json
 ```
 
 > Once the __OVA__ has been built it can be uploaded to ESXi/vSphere and provisioned accordingly.
