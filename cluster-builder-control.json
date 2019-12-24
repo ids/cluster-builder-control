@@ -11,11 +11,6 @@
       "script": "bin/setup.sh"
     },
     {
-      "type": "shell",
-      "execute_command": "echo 'admin' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "bin/vmware-tools.sh"
-    },
-    {
       "type": "file",
       "source": "keys/authorized_keys",
       "destination": "/tmp/authorized_keys"
@@ -48,7 +43,7 @@
   "post-processors": [{
       "type": "shell-local",
       "inline": [
-          "ovftool --overwrite cluster-builder-control.vmwarevm/cluster-builder-control.vmx output_ovas/cluster-builder-control.ova"
+          "ovftool --overwrite cluster-builder-control.vmx/cluster-builder-control.vmx output_ovas/cluster-builder-control.ova"
       ]
   },
   {
@@ -70,20 +65,19 @@
       "headless": true,
       "http_directory": "http",
       "iso_urls": [
-        "iso/CentOS-7-x86_64-Minimal-1810.iso",
-        "http://mirrors.sonic.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1810.iso"
+        "iso/CentOS-7-x86_64-Minimal-1908.iso",
+        "http://mirror.csclub.uwaterloo.ca/centos/7.7.1908/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso"
       ],
       "iso_checksum_type": "sha256",
-      "iso_checksum": "38d5d51d9d100fd73df031ffd6bd8b1297ce24660dc8c13a3b8b4534a4bd291c",
+      "iso_checksum": "9a2c47d97b9975452f7d582264e9fc16d108ed8252ac6816239a3b58cef5c53d",
       "ssh_username": "admin",
       "ssh_password": "admin",
       "ssh_port": 22,
       "ssh_wait_timeout": "20000s",
       "shutdown_command": "echo 'admin'|sudo -S /sbin/halt -h -p",
-      "output_directory": "cluster-builder-control.vmwarevm",
+      "output_directory": "cluster-builder-control.vmx",
       "vm_name": "cluster-builder-control",
       "vmx_template_path": "templates/cluster-builder-control-template.vmx",
-      "format": "ova",
       "vmx_data": {
         "memsize": "6144",
         "numvcpus": "2"

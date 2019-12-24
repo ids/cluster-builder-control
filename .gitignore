@@ -3,6 +3,6 @@ installs
 iso
 output_ovas
 cluster-builder-control.ova
-cluster-builder-control.vmwarevm
-fedora-cluster-builder-control.vmwarevm
+cluster-builder-control.vmx
+fedora-cluster-builder-control.vmx
 packer_cache

@@ -1,6 +1,6 @@
 # Cluster Builder Control
 
-This packer configuration builds a CentOS 7.6 or Fedora 29 control station for creating and managing cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
+This packer configuration builds a CentOS 7.6 or Fedora 30 control station for creating and managing cluster VMware VMs using [cluster-builder](https://github.com/ids/cluster-builder) .
 
 The _Cluster Builder Control_ virtual machine can be deployed directly to ESXi and uses nested VMware hypervisor to build and configure the _cluster-builder_ virtual machines from within the ESXi environment.
 

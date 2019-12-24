@@ -10,14 +10,18 @@ sudo yum makecache fast
 echo '>>> Installing yum-utils'
 yum install -y yum-utils unzip 
 
-# Add the EPEL repository, and install Ansible.
-echo '>>> Adding EPEL yum repo'
-yum-config-manager --add-repo=https://dl.fedoraproject.org/pub/epel/7/x86_64/
-curl --fail --location --silent --show-error --verbose -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+echo '>>> Installing open vmware tools'
+yum install -y open-vm-tools
 
-echo '>>> Cleaning yum cache'
-yum clean all
+echo '>>> Installing Python3'
+yum install -y python3 python3-pip python3-devel python-devel libxml2-dev libxslt-dev libz-dev gcc gcc-c++ make 
+
+echo '>>> Install Ansible'
+pip3 install ansible
+
+echo
+echo '>>> Installing Taurus Load Testing Tool'
+pip3 install bzt
 
 echo
 echo '>>> Installing Gnome'
@@ -26,31 +30,11 @@ yum install -y openssh-clients rsync git vim mc tmux firefox xrdp screen
 
 systemctl set-default graphical.target
 
-echo '>>> Installing pip (and dependencies)'
-yum install -y python-devel libffi-devel openssl-devel gcc python-pip redhat-rpm-config
-
-echo
-echo '>>> Installing Ansible'
-pip install ansible
-
-echo
-echo '>>> Installing Taurus Load Testing Tool'
-pip install psutil
-pip install bzt
-
-echo '>>> Upgrading pip'
-pip install --upgrade pip
-
-# Avoid bug in default python cryptography library
-# [WARNING]: Optional dependency 'cryptography' raised an exception, falling back to 'Crypto'
-echo '>>> Upgrading python cryptography library'
-pip install --upgrade cryptography
-
 echo
 echo '>>> Installing Packer'
 mkdir -p /home/admin/Setups
 cd /home/admin/Setups
-curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.4.2/packer_1.4.2_linux_amd64.zip
+curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip
 unzip /home/admin/Setups/packer.zip -d /home/admin/Setups/
 cp /home/admin/Setups/packer /usr/local/bin 
 rm /home/admin/Setups/packer
@@ -97,3 +81,7 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 yum install -y kubectl
+
+echo '>>> Cleaning yum cache'
+yum clean all
+

@@ -8,21 +8,21 @@ echo '>>> Updating Fedora'
 dnf check-update -y
 
 echo '>>> Installing python3 and ansible'
-dnf install -y python3 ansible screen
+dnf install -y python3 python3-pip python3-devel screen libxml2-dev libxslt-dev libz-dev gcc gcc-c++ make 
 
-echo '>>> Upgrading pip'
-pip install --upgrade pip
+echo
+echo '>>> Installing Ansible'
+pip3 install ansible
 
 echo
 echo '>>> Installing Taurus Load Testing Tool'
-pip install psutil
-pip install bzt
+pip3 install bzt
 
 echo
 echo '>>> Installing Packer'
 mkdir -p /home/admin/Setups
 cd /home/admin/Setups
-curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.3.2/packer_1.3.2_linux_amd64.zip
+curl -o /home/admin/Setups/packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip
 unzip /home/admin/Setups/packer.zip -d /home/admin/Setups/
 cp /home/admin/Setups/packer /usr/local/bin 
 rm /home/admin/Setups/packer
