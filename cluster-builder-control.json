@@ -79,7 +79,7 @@
       "vm_name": "cluster-builder-control",
       "vmx_template_path": "templates/cluster-builder-control-template.vmx",
       "vmx_data": {
-        "memsize": "6144",
+        "memsize": "2048",
         "numvcpus": "2"
       },
        "vmx_data_post": {
