@@ -2,7 +2,7 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "http/bg.jpg",
+      "source": "http/bg_bw.jpg",
       "destination": "/tmp/bg.jpg"
     },
     {

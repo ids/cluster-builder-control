@@ -26,7 +26,7 @@ pip3 install bzt
 echo
 echo '>>> Installing Gnome'
 yum -y groups install "GNOME Desktop"
-yum install -y openssh-clients rsync git vim mc tmux firefox xrdp screen
+yum install -y openssh-clients rsync git vim mc tmux firefox xrdp screen arc-theme
 
 systemctl set-default graphical.target
 
