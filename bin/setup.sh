@@ -14,7 +14,7 @@ echo '>>> Installing open vmware tools'
 yum install -y open-vm-tools
 
 echo '>>> Installing Python3'
-yum install -y python3 python3-pip python3-devel python-devel libxml2-dev libxslt-dev libz-dev gcc gcc-c++ make 
+yum install -y python3 python3-pip python3-devel python-devel libselinux-python libxml2-dev libxslt-dev libz-dev gcc gcc-c++ make 
 
 echo '>>> Install Ansible'
 pip3 install ansible
