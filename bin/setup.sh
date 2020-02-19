@@ -17,7 +17,7 @@ echo '>>> Installing Python3'
 yum install -y python3 python3-pip python3-devel python-devel libselinux-python libxml2-dev libxslt-dev libz-dev gcc gcc-c++ make 
 
 echo '>>> Install Ansible'
-pip3 install ansible
+yum install -y ansible
 
 echo
 echo '>>> Installing Taurus Load Testing Tool'
